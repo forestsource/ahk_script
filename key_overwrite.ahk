@@ -24,7 +24,7 @@ global isLeftAltPressed := false
 LAlt:: {
     global isLeftAltPressed
     isLeftAltPressed := true
-    Send("{Blind}{LAlt DownR}")
+    SetTimer LAltDown, -200
 }
 ; Define the hotkey for the left Alt key release
 LAlt up:: {
@@ -35,11 +35,10 @@ LAlt up:: {
     }
     Send("{Blind}{LAlt Up}")
 }
-; Define the hotkey for the left Alt key combined with any other key
-~LAlt & *:: {
-    global isLeftAltPressed
-    isLeftAltPressed := false
-    Send("{Blind}{LAlt DownR}")
+LAltDown() {
+    if isLeftAltPressed {
+        Send("{Blind}{LAlt DownR}")
+    }
 }
 
 ;;;;;;;;;;;;;;;;;;
@@ -51,7 +50,7 @@ global isRightAltPressed := false
 RAlt:: {
     global isRightAltPressed
     isRightAltPressed := true
-    Send("{Blind}{RAlt DownR}")
+    SetTimer RAltDown, -200
 }
 ; Define the hotkey for the right Alt key release
 RAlt up:: {
@@ -62,11 +61,10 @@ RAlt up:: {
     }
     Send("{Blind}{RAlt Up}")
 }
-; Define the hotkey for the right Alt key combined with any other key
-~RAlt & *:: {
-    global isRightAltPressed
-    isRightAltPressed := false
-    Send("{Blind}{RAlt DownR}")
+RAltDown() {
+    if isRightAltPressed {
+        Send("{Blind}{RAlt DownR}")
+    }
 }
 
 IME_OFF() {
