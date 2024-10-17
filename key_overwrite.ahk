@@ -13,14 +13,67 @@ SendMode("Input")
 }
 
 ; Disable IME Change
-#Space:: {
+#Space:: return
+
+;;;;;;;;;;;;;;;;;;
+;;;; 左Altキー ;;;;
+;;;;;;;;;;;;;;;;;;
+; Initialize the global flag
+global isLeftAltPressed := false
+; Define the hotkey for the left Alt key press
+LAlt:: {
+    global isLeftAltPressed
+    isLeftAltPressed := true
+    Send("{Blind}{LAlt DownR}")
+}
+; Define the hotkey for the left Alt key release
+LAlt up:: {
+    global isLeftAltPressed
+    if isLeftAltPressed {
+        isLeftAltPressed := false
+        IME_OFF()
+    }
+    Send("{Blind}{LAlt Up}")
+}
+; Define the hotkey for the left Alt key combined with any other key
+~LAlt & *:: {
+    global isLeftAltPressed
+    isLeftAltPressed := false
+    Send("{Blind}{LAlt DownR}")
 }
 
-; IME
-LAlt up:: {
+;;;;;;;;;;;;;;;;;;
+;;;; 右Altキー ;;;;
+;;;;;;;;;;;;;;;;;;
+; Initialize the global flag
+global isRightAltPressed := false
+; Define the hotkey for the right Alt key press
+RAlt:: {
+    global isRightAltPressed
+    isRightAltPressed := true
+    Send("{Blind}{RAlt DownR}")
+}
+; Define the hotkey for the right Alt key release
+RAlt up:: {
+    global isRightAltPressed
+    if isRightAltPressed {
+        isRightAltPressed := false
+        IME_ON()
+    }
+    Send("{Blind}{RAlt Up}")
+}
+; Define the hotkey for the right Alt key combined with any other key
+~RAlt & *:: {
+    global isRightAltPressed
+    isRightAltPressed := false
+    Send("{Blind}{RAlt DownR}")
+}
+
+IME_OFF() {
     IME_SET(0)
 }
-RAlt up:: {
+
+IME_ON() {
     IME_SET(1)
 }
 
